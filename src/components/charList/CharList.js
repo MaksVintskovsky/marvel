@@ -13,7 +13,6 @@ class CharList extends Component {
 
     marvelService = new MarvelService()
     componentDidMount() {
-        console.log(this.marvelService.getAllCharacters())
         this.marvelService.getAllCharacters()
             .then(this.onCharListLoaded)
             .catch(this.onError)
@@ -37,9 +36,12 @@ class CharList extends Component {
                 imgStyle = {'objectFit': 'unset'}
             }
             return(
-                <li className="char__item" key={item.id}>
-                    <img src={item.thumbnail} alt={item.name} style={imgStyle}/>
-                    <div className="char__name">{item.name}</div>
+                <li 
+                    className="char__item" 
+                    key={item.id}
+                    onClick={() => this.props.onCharSelected(item.id)}>
+                        <img src={item.thumbnail} alt={item.name} style={imgStyle}/>
+                        <div className="char__name">{item.name}</div>
                 </li>
             )
         })
